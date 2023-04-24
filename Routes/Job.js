@@ -3,7 +3,7 @@ const { createJob, updateJob, getAllJobs, getAllCreatedJobs, getAllCreatedJobsBy
 const decodeToken = require('../Middleware/isValidToken');
 const Router = express.Router();
 
-Router.post('/create', decodeToken, createJob);
+Router.post('/create', createJob);
 
 Router.patch('/:_id', decodeToken, updateJob);
 

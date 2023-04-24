@@ -2,7 +2,7 @@ const Job = require('../Models/Job');
 
 const createJob = async (req, res) => {
 	try {
-		const newJob = new Job({ ...req.body, creatorID: req.user._id });
+		const newJob = new Job({ ...req.body });
 		const finalJob = await newJob.save();
 		if (finalJob) {
 			res.json({ error: false, message: "Job Created Successfully!", job: finalJob });
@@ -34,7 +34,7 @@ const deleteJob = async (req, res) => {
 
 const getAllJobs = async (req, res) => {
 	try {
-		const jobs = await Job.find({});
+		const jobs = await Job.find({}).populate('creatorID');
 		if(jobs){
 			res.json({ error: false, message: "Success", jobs: jobs })
 		}else{

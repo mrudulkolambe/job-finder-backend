@@ -19,6 +19,22 @@ const JOB_SCHEMA = new Schema({
 		type: mongoose.SchemaTypes.ObjectId,
 		ref: "user"
 	},
+	salary: {
+		type: String,
+		required: true
+	},
+	post:{
+		type: String,
+		required: true
+	},
+	criteria:{
+		type: String,
+		required: true
+	},
+	experience:{
+		type: String,
+		required: true
+	},
 }, { timestamps: true })
 
 
