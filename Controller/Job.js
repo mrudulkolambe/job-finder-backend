@@ -45,8 +45,22 @@ const getAllJobs = async (req, res) => {
 	}
 }
 
+const getJobById = async (req, res) => {
+	try {
+		const jobs = await Job.findById(req.params._id).populate('creatorID');
+		if(jobs){
+			res.json({ error: false, message: "Success", job: jobs })
+		}else{
+			res.json({ error: true, message: "Something Went Wrong!", job: undefined })
+		}
+	} catch (error) {
+		res.json({ error: true, message: error.message, job: undefined });
+	}
+}
+
 const getAllCreatedJobs = async (req, res) => {
 	try {
+		console.log(req.params.creatorID)
 		const jobs = await Job.find({creatorID: req.params.creatorID});
 		if(jobs){
 			res.json({ error: false, message: "Success", jobs: jobs })
@@ -71,4 +85,4 @@ const getAllCreatedJobsByToken = async (req, res) => {
 	}
 }
 
-module.exports = { createJob, updateJob, deleteJob, getAllJobs, getAllCreatedJobs, getAllCreatedJobsByToken };
+module.exports = { createJob, updateJob, deleteJob, getAllJobs, getAllCreatedJobs, getAllCreatedJobsByToken, getJobById };

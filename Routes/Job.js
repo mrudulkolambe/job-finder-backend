@@ -1,5 +1,5 @@
 const express = require('express');
-const { createJob, updateJob, getAllJobs, getAllCreatedJobs, getAllCreatedJobsByToken } = require('../Controller/Job');
+const { createJob, updateJob, getAllJobs, getAllCreatedJobs, getAllCreatedJobsByToken, getJobById } = require('../Controller/Job');
 const decodeToken = require('../Middleware/isValidToken');
 const Router = express.Router();
 
@@ -9,9 +9,11 @@ Router.patch('/:_id', decodeToken, updateJob);
 
 Router.get('/getAllJobs', getAllJobs);
 
+Router.get('/:_id', getJobById);
+
 Router.get('/creator', decodeToken, getAllCreatedJobsByToken);
 
-Router.get('/:creatorID', getAllCreatedJobs);
+Router.get('/creator/:creatorID', getAllCreatedJobs);
 
 
 
